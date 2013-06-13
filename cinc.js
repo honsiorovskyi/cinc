@@ -33,7 +33,7 @@
      *      which will identify your module.
      *      Here you can use everything, for instance, module path:
      *      'lib/tools/wrench.js'
-     * @param {Object|Function} module Module object or factory function
+     * @param {Object|Function} module A module object or a constructor
      * @return Nothing
      */
 
@@ -49,10 +49,10 @@
             throw 'Another module with the name \'' + module_name + '\' already exists!';
         }
 
-        // if module is a factory function then call it and use
+        // if module is a constructor then call it and use
         // its result as module
         if (typeof module === 'function') {
-            module = module.apply(this, []);
+            module = new module;
         }
 
         // store module
@@ -71,23 +71,11 @@
      * @param {string} module_name Module name which has been
      *      associated with the module using <i>provide</i> call
      * @param {Array} [options] Extra arguments to be passed
-     *      to the module factory function if any. Default: []
-     * @param {Object} [context] Context for the factory function
-     *      (usually <i>this</i> is to be passed).
-     *      Default: <i>this</i> for <i>cinc</i> library (usually <i>window</i>).
-     *      WARNING: You should use this in conjunction with
-     *      the <i>options</i> parameter
+     *      to the init function if any. Default: []
      * @return Module object
      */
 
-    root.use = function(context, module_name, options) {
-        // shift arguments if no context passed
-        if (typeof context === 'string') {
-            options = module_name;
-            module_name = context;
-            context = null;
-        }
-
+    root.use = function(module_name, options) {
         // return if there is no module_name
         if (!module_name) {
             throw 'Module name not supplied!';
@@ -114,7 +102,7 @@
             }
 
             // call init method
-            module.init.apply(context ? context : this, options ? options : []);
+            module.init.apply(module, options ? options : []);
         }
 
         // show debug info
@@ -149,22 +137,13 @@
      * Include multiple modules
      *
      * @global
-     * @param {Object} [context] Context for the factory function
-     *      (usually <i>this</i> is to be passed).
-     *      Default: <i>this</i> for <i>cinc</i> library (usually <i>window</i>).
      * @param {string|Array} module_names Either a regular expression or a list of module names
      *      to include
      * @returns A dictionary containing module names and results of the <i>use</i>
      *      function calls
      */
 
-    root.useall = function(context, module_names) {
-        // shift arguments if needed
-        if (module_names === undefined) {
-            module_names = context;
-            context = null;
-        }
-
+    root.useall = function(module_names) {
         // vars
         var module_name;
         var results = {};
@@ -174,7 +153,7 @@
             var re = new RegExp(module_names);
             for (module_name in modules) {
                 if (re.test(module_name)) {
-                    results[module_name] = use(context, module_name);
+                    results[module_name] = use(module_name);
                 }
             }
         } else if (module_names instanceof Array) {
@@ -203,8 +182,8 @@
      *      <i>cinq</i> does not support anonymous modules, so they will be ignored.
      * @param {Array} deps A list of module's dependencies. For each item in this list function
      *      <i>use</i> will be applied and the results will be passed as arguments to the module's
-     *      factory function (if any)
-     * @param {Object|Function} module Module object or factory function
+     *      constructor (if any)
+     * @param {Object|Function} module A module object or a constructor
      * @return Nothing
      */
 
@@ -229,17 +208,17 @@
 
             // check just for existance, omit type check
             if (!module) {
-                throw 'No module object or factory function specified!';
+                throw 'No module object or constructor specified!';
             }
 
             // include dependencies
             for (var i = 0, len = deps.length; i < len; i++) {
-                deps[i] = use(this, deps[i]);
+                deps[i] = use(deps[i]);
             }
 
-            // call factory function
+            // call constructor
             if (typeof module === 'function') {
-                module = module.apply(this, deps);
+                module = new module(deps);
             }
 
             // store module

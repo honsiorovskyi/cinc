@@ -7,22 +7,35 @@ to the C language and RequireJS. It provides two global functions: `provide` and
 Function `provide` is used to declare a module but hide it from the global scope.
 Function `use` is used to inject a module into the current scope.
 
-Example
--------
+Example 1
+---------
 
     provide('helloworld', function() {
         var hw = {};
         var message = 'Hello, %username%!';
         
-        hw.do_it = function() {
+        this.do_it = function() {
             alert(message);
         };
-
-        return hw;
     });
 
     var sample = use('helloworld');
     sample.do_it();
+
+Example 2
+---------
+
+    provide('anothersample', {
+        msg = 'Hello, world!',
+
+        test: function() {
+            alert('This is another example!');
+        }
+    });
+
+    var sample = use('anothersample');
+    alert(sample.msg);
+    sample.test();
 
 
 Initializing stuff
@@ -36,17 +49,16 @@ Example
 -------
 
     provide('initsample', function() {
-        return {
-            init: {
-                alert('This is init!');
+        this.init = function() {
+            alert('This is init!');
 
-                // do some initialization
-            },
-            do_it: {
-                alert('This is another method!');
+            // do some initialization
+        };
 
-                // do something
-            }
+        this.do_it: {
+            alert('This is another method!');
+
+            // do something
         };
     });
 
