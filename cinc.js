@@ -1,7 +1,7 @@
 /*
  * cinc - Simple module management for JavaScript
  *
- * Copyright (C) 2013 Denis Gonsiorovsky <dns.gnsr@gmail.com>
+ * Copyright (C) 2015 Denis Gonsiorovsky <dns.gnsr@gmail.com>
  *
  * Licensed under The MIT License
  * http://opensource.org/licenses/MIT
