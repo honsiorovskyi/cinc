@@ -9,6 +9,17 @@
 
 (function(root) {
     /**
+     * Array.isArray shim
+     *
+     * @private
+     */
+    if (!Array.isArray) {
+        Array.isArray = function(arg) {
+            return Object.prototype.toString.call(arg) === '[object Array]';
+        };
+    }
+
+    /**
      * Modules storage
      *
      * @private
@@ -214,12 +225,12 @@
         * @return Nothing
         */
 
-        root.define = function(module_name, deps, module) {
+        root.define = function(module_name, deps, callback) {
             // process anonymous module
             if (typeof module_name !== 'string') {
                 if (announced_module) {
                     console.log('Trying to use a previously announced name for an anonymous module.');
-                    module = deps;
+                    callback = deps;
                     deps = module_name;
                     module_name = announced_module;
                     announced_module = null;
@@ -229,20 +240,21 @@
                 }
             }
 
+            // shift arguments if needed
+            if (!Array.isArray(deps)) {
+                callback = deps;
+                deps = [];
+            }
+
             // return if another module with module_name already exists
             // in the storage
             if (module_name in modules) {
                 throw 'Another module with the name \'' + module_name + '\' already exists!';
             }
 
-            // check dependencies
-            if (!(deps instanceof Array)) {
-                throw 'Dependencies list should be an Array instance!';
-            }
-
             // check just for existance, omit type check
-            if (!module) {
-                throw 'No module object or constructor specified!';
+            if (!callback || typeof callback !== 'function') {
+                throw 'No callback specified!';
             }
 
             // include dependencies
@@ -250,13 +262,11 @@
                 deps[i] = use(deps[i]);
             }
 
-            // call constructor
-            if (typeof module === 'function') {
-                module = new module(deps);
-            }
+            // call callback
+            callback = callback.apply(this, deps);
 
             // store module
-            modules[module_name] = module;
+            modules[module_name] = callback;
             amd_modules.push(module_name);
         };
 
