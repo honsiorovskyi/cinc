@@ -2,7 +2,7 @@ Getting started
 ===============
 
 This library implements a mechanism of JS modules definition and inclusion similar
-to the C language and RequireJS. It provides two global functions: `provide` and `use`.
+to the RequireJS. It provides two global functions: `provide` and `use`.
 
 Function `provide` is used to declare a module but hide it from the global scope.
 Function `use` is used to inject a module into the current scope.
