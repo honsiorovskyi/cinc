@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>JSDoc: Source: cinc.js</title>
-    
+
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
     <!--[if lt IE 9]>
@@ -16,16 +16,16 @@
 <body>
 
 <div id="main">
-    
+
     <h1 class="page-title">Source: cinc.js</h1>
-    
+
     
 
 
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>/*
+            <pre class="prettyprint source linenums"><code>/*
  * cinc - Simple module management for JavaScript
  *
  * Copyright (C) 2013 Denis Gonsiorovsky &lt;dns.gnsr@gmail.com>
@@ -50,6 +50,13 @@
      */
 
     var amd_modules = [];
+
+    /**
+     * Announced anonymous module
+     *
+     * @private
+     */
+    var announced_module = null;
 
 
     /**
@@ -122,9 +129,9 @@
         }
 
         // run init
-        if (!(module_name in amd_modules) && module.init && (typeof module.init === 'function')) {
+        if (!(module_name in amd_modules) &amp;&amp; module.init &amp;&amp; (typeof module.init === 'function')) {
              // check for options
-            if (options && !(options instanceof Array)) {
+            if (options &amp;&amp; !(options instanceof Array)) {
                 throw 'Argument \'options\' should be an Array instance!'
             }
 
@@ -195,31 +202,58 @@
         return results;
     };
 
-    /** 
-     * AMD &lt;i>define&lt;/i> emulation
-     *
-     * &lt;br/>&lt;b>IMPORTANT:&lt;/b> This is not a full-featured AMD implementation. It does not have
-     * the ability to load external module. This function just appends an AMD module
-     * to the &lt;i>cinq&lt;/i> storage.
-     *
-     * &lt;br/>&lt;b>NOTE:&lt;/b> This function is only available when there is no other AMD realizations found.
-     *
-     * @global
-     * @param {string} module_name A unique name which will identify the module.
-     *      &lt;i>cinq&lt;/i> does not support anonymous modules, so they will be ignored.
-     * @param {Array} deps A list of module's dependencies. For each item in this list function
-     *      &lt;i>use&lt;/i> will be applied and the results will be passed as arguments to the module's
-     *      constructor (if any)
-     * @param {Object|Function} module A module object or a constructor
-     * @return Nothing
-     */
+    if (!root.CINC_NO_AMD_EMULATION) {
+        /**
+        * Announce the name to be used in the consequent call to &lt;i>define&lt;/i> function passing
+        * it an anonymous module. This module will be stored in the &lt;i>cinc&lt;/i> storage using &lt;i>module_name&lt;/i>.
+        *
+        * Can be disabled by setting &lt;i>root.CINC_NO_AMD_EMULATION&lt;/i> to &lt;i>true&lt;/i>.
+        *
+        * @global
+        * @param {string} module_name A unique name which will identify the module.
+        * @return Nothing
+        */
 
-    if (!root.define) {
+        root.announce_module = function(module_name) {
+            announced_module = module_name;
+        };
+    }
+
+    if (!root.define &amp;&amp; !root.CINC_NO_AMD_EMULATION) {
+        /** 
+        * AMD &lt;i>define&lt;/i> emulation
+        *
+        * &lt;br/>&lt;b>IMPORTANT:&lt;/b> This is not a full-featured AMD implementation. It does not have
+        * the ability to load external module. This function just appends an AMD module
+        * to the &lt;i>cinq&lt;/i> storage.
+        *
+        * Can be disabled by setting &lt;i>root.CINC_NO_AMD_EMULATION&lt;/i> to &lt;i>true&lt;/i>.
+        *
+        * &lt;br/>&lt;b>NOTE:&lt;/b> This function is only available when there is no other AMD realizations found.
+        *
+        * @global
+        * @param {string} module_name A unique name which will identify the module.
+        *      &lt;i>cinq&lt;/i> does not support anonymous modules, so they will be ignored.
+        * @param {Array} deps A list of module's dependencies. For each item in this list function
+        *      &lt;i>use&lt;/i> will be applied and the results will be passed as arguments to the module's
+        *      constructor (if any)
+        * @param {Object|Function} module A module object or a constructor
+        * @return Nothing
+        */
+
         root.define = function(module_name, deps, module) {
-            // only named modules are supported
+            // process anonymous module
             if (typeof module_name !== 'string') {
-                console.log('WARNING: cinc does not support anonymous AMD modules. Ignoring.');
-                return;
+                if (announced_module) {
+                    console.log('Trying to use a previously announced name for an anonymous module.');
+                    module = deps;
+                    deps = module_name;
+                    module_name = announced_module;
+                    announced_module = null;
+                } else {
+                    console.log('WARNING: cinc does not support anonymous AMD modules. Ignoring.');
+                    return;
+                }
             }
 
             // return if another module with module_name already exists
@@ -259,23 +293,25 @@
         }
     }
 
-    /** 
-     * AMD &lt;i>require&lt;/i> emulation
-     *
-     * &lt;br/>&lt;b>IMPORTANT:&lt;/b> This is not a full-featured AMD implementation. It does not have
-     * the ability to load external module. This function just extracts AMD modules
-     * from the &lt;i>cinq&lt;/i> storage and executes the callback.
-     *
-     * &lt;br/>&lt;b>NOTE:&lt;/b> This function is only available when there is no other AMD realizations found.
-     *
-     * @global
-     * @param {Array} deps A list of previously defined modules to include.
-     * @param {Function} [callback] A function that will be called after modules are included successfully.
-     *      This function will be passed loaded module objects as arguments.
-     * @return Nothing
-     */
+    if (!root.require &amp;&amp; !root.CINC_NO_AMD_EMULATION) {
+        /** 
+        * AMD &lt;i>require&lt;/i> emulation
+        *
+        * &lt;br/>&lt;b>IMPORTANT:&lt;/b> This is not a full-featured AMD implementation. It does not have
+        * the ability to load external module. This function just extracts AMD modules
+        * from the &lt;i>cinq&lt;/i> storage and executes the callback.
+        *
+        * Can be disabled by setting &lt;i>root.CINC_NO_AMD_EMULATION&lt;/i> to &lt;i>true&lt;/i>.
+        *
+        * &lt;br/>&lt;b>NOTE:&lt;/b> This function is only available when there is no other AMD realizations found.
+        *
+        * @global
+        * @param {Array} deps A list of previously defined modules to include.
+        * @param {Function} [callback] A function that will be called after modules are included successfully.
+        *      This function will be passed loaded module objects as arguments.
+        * @return Nothing
+        */
 
-    if (!root.require) {
         root.require = function(deps, callback) {
             // check input
             if (!deps || !(deps instanceof Array)) {
@@ -309,13 +345,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#define">define</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#provide.config">provide.config</a></li><li><a href="global.html#require">require</a></li><li><a href="global.html#use">use</a></li><li><a href="global.html#use.config">use.config</a></li><li><a href="global.html#useall">useall</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#announce_module">announce_module</a></li><li><a href="global.html#define">define</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#provide.config">provide.config</a></li><li><a href="global.html#require">require</a></li><li><a href="global.html#use">use</a></li><li><a href="global.html#use.config">use.config</a></li><li><a href="global.html#useall">useall</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Thu Jun 13 2013 12:54:59 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Fri May 15 2015 09:10:21 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -24,6 +24,13 @@
 
     var amd_modules = [];
 
+    /**
+     * Announced anonymous module
+     *
+     * @private
+     */
+    var announced_module = null;
+
 
     /**
      * Declare a module
@@ -168,31 +175,58 @@
         return results;
     };
 
-    /** 
-     * AMD <i>define</i> emulation
-     *
-     * <br/><b>IMPORTANT:</b> This is not a full-featured AMD implementation. It does not have
-     * the ability to load external module. This function just appends an AMD module
-     * to the <i>cinq</i> storage.
-     *
-     * <br/><b>NOTE:</b> This function is only available when there is no other AMD realizations found.
-     *
-     * @global
-     * @param {string} module_name A unique name which will identify the module.
-     *      <i>cinq</i> does not support anonymous modules, so they will be ignored.
-     * @param {Array} deps A list of module's dependencies. For each item in this list function
-     *      <i>use</i> will be applied and the results will be passed as arguments to the module's
-     *      constructor (if any)
-     * @param {Object|Function} module A module object or a constructor
-     * @return Nothing
-     */
+    if (!root.CINC_NO_AMD_EMULATION) {
+        /**
+        * Announce the name to be used in the consequent call to <i>define</i> function passing
+        * it an anonymous module. This module will be stored in the <i>cinc</i> storage using <i>module_name</i>.
+        *
+        * Can be disabled by setting <i>root.CINC_NO_AMD_EMULATION</i> to <i>true</i>.
+        *
+        * @global
+        * @param {string} module_name A unique name which will identify the module.
+        * @return Nothing
+        */
 
-    if (!root.define) {
+        root.announce_module = function(module_name) {
+            announced_module = module_name;
+        };
+    }
+
+    if (!root.define && !root.CINC_NO_AMD_EMULATION) {
+        /** 
+        * AMD <i>define</i> emulation
+        *
+        * <br/><b>IMPORTANT:</b> This is not a full-featured AMD implementation. It does not have
+        * the ability to load external module. This function just appends an AMD module
+        * to the <i>cinq</i> storage.
+        *
+        * Can be disabled by setting <i>root.CINC_NO_AMD_EMULATION</i> to <i>true</i>.
+        *
+        * <br/><b>NOTE:</b> This function is only available when there is no other AMD realizations found.
+        *
+        * @global
+        * @param {string} module_name A unique name which will identify the module.
+        *      <i>cinq</i> does not support anonymous modules, so they will be ignored.
+        * @param {Array} deps A list of module's dependencies. For each item in this list function
+        *      <i>use</i> will be applied and the results will be passed as arguments to the module's
+        *      constructor (if any)
+        * @param {Object|Function} module A module object or a constructor
+        * @return Nothing
+        */
+
         root.define = function(module_name, deps, module) {
-            // only named modules are supported
+            // process anonymous module
             if (typeof module_name !== 'string') {
-                console.log('WARNING: cinc does not support anonymous AMD modules. Ignoring.');
-                return;
+                if (announced_module) {
+                    console.log('Trying to use a previously announced name for an anonymous module.');
+                    module = deps;
+                    deps = module_name;
+                    module_name = announced_module;
+                    announced_module = null;
+                } else {
+                    console.log('WARNING: cinc does not support anonymous AMD modules. Ignoring.');
+                    return;
+                }
             }
 
             // return if another module with module_name already exists
@@ -232,23 +266,25 @@
         }
     }
 
-    /** 
-     * AMD <i>require</i> emulation
-     *
-     * <br/><b>IMPORTANT:</b> This is not a full-featured AMD implementation. It does not have
-     * the ability to load external module. This function just extracts AMD modules
-     * from the <i>cinq</i> storage and executes the callback.
-     *
-     * <br/><b>NOTE:</b> This function is only available when there is no other AMD realizations found.
-     *
-     * @global
-     * @param {Array} deps A list of previously defined modules to include.
-     * @param {Function} [callback] A function that will be called after modules are included successfully.
-     *      This function will be passed loaded module objects as arguments.
-     * @return Nothing
-     */
+    if (!root.require && !root.CINC_NO_AMD_EMULATION) {
+        /** 
+        * AMD <i>require</i> emulation
+        *
+        * <br/><b>IMPORTANT:</b> This is not a full-featured AMD implementation. It does not have
+        * the ability to load external module. This function just extracts AMD modules
+        * from the <i>cinq</i> storage and executes the callback.
+        *
+        * Can be disabled by setting <i>root.CINC_NO_AMD_EMULATION</i> to <i>true</i>.
+        *
+        * <br/><b>NOTE:</b> This function is only available when there is no other AMD realizations found.
+        *
+        * @global
+        * @param {Array} deps A list of previously defined modules to include.
+        * @param {Function} [callback] A function that will be called after modules are included successfully.
+        *      This function will be passed loaded module objects as arguments.
+        * @return Nothing
+        */
 
-    if (!root.require) {
         root.require = function(deps, callback) {
             // check input
             if (!deps || !(deps instanceof Array)) {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>JSDoc: Global</title>
-    
+
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
     <!--[if lt IE 9]>
@@ -16,81 +16,83 @@
 <body>
 
 <div id="main">
-    
+
     <h1 class="page-title">Global</h1>
-    
+
     
 
 
 
 <section>
-    
+
 <header>
     <h2>
     
     </h2>
     
-</header>  
+</header>
 
 <article>
     <div class="container-overview">
     
-    
+
     
         
-        
+
         
 <dl class="details">
     
-        
-    
-    
+
     
 
     
+
     
+
     
+
     
+
     
+
     
+
     
+
     
+
     
+
     
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 </dl>
 
-        
+
         
     
     </div>
+
     
+
     
+
     
+
     
+
+     
+
     
-    
-    
-    
-    
-    
-    
+
     
         <h3 class="subsection-title">Members</h3>
-        
+
         <dl>
             
 <dt>
     <h4 class="name" id="provide.config"><span class="type-signature"></span>provide.config<span class="type-signature"> :Object</span></h4>
-    
+
     
 </dt>
 <dd>
@@ -99,7 +101,7 @@
         An alias for <i>cinc</i> configuration
     </div>
     
-    
+
     
         <h5>Type:</h5>
         <ul>
@@ -115,32 +117,32 @@
     
 <dl class="details">
     
-        
-    
-    
+
     
 
     
+
     
+
     
+
     
+
     
+
     
+
     
-    
-    
-    
-    
-    
+
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cinc.js.html">cinc.js</a>, <a href="cinc.js.html#line118">line 118</a>
+        <a href="cinc.js.html">cinc.js</a>, <a href="cinc.js.html#line131">line 131</a>
     </li></ul></dd>
     
+
     
-    
-    
+
     
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
@@ -149,11 +151,13 @@
         </ul>
     </dd>
     
-    
+
     
 </dl>
 
+
     
+
     
 </dd>
 
@@ -161,7 +165,7 @@
             
 <dt>
     <h4 class="name" id="use.config"><span class="type-signature"></span>use.config<span class="type-signature"> :Object</span></h4>
-    
+
     
 </dt>
 <dd>
@@ -170,7 +174,7 @@
         <i>cinc</i> configuration
     </div>
     
-    
+
     
         <h5>Type:</h5>
         <ul>
@@ -186,36 +190,36 @@
     
 <dl class="details">
     
-        
+
         <h5 class="subsection-title">Properties:</h5>
-        
+
         <dl>
 
 <table class="props">
     <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
         <tr>
             
                 <td class="name"><code>debug</code></td>
             
-            
+
             <td class="type">
             
                 
@@ -224,69 +228,203 @@
 
             
             </td>
+
             
+
             
-            
-            
-            
+
             <td class="description last">Display debug messages</td>
         </tr>
-	
-	
-	</tbody>
+
+    
+    </tbody>
 </table></dl>
-        
-    
-        
-    
-    
+
     
 
     
+
     
+
     
+
     
+
     
+
     
+
     
+
     
-    
-    
-    
-    
+
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cinc.js.html">cinc.js</a>, <a href="cinc.js.html#line116">line 116</a>
+        <a href="cinc.js.html">cinc.js</a>, <a href="cinc.js.html#line123">line 123</a>
     </li></ul></dd>
     
+
     
+
     
-    
-    
-    
+
     
 </dl>
 
+
     
+
     
 </dd>
 
         </dl>
     
-    
+
     
         <h3 class="subsection-title">Methods</h3>
-        
+
         <dl>
             
 <dt>
-    <h4 class="name" id="define"><span class="type-signature"></span>define<span class="signature">(module_name, deps, module)</span><span class="type-signature"></span></h4>
-    
+    <h4 class="name" id="announce_module"><span class="type-signature"></span>announce_module<span class="signature">(module_name)</span><span class="type-signature"></span></h4>
+
     
 </dt>
 <dd>
+
     
+    <div class="description">
+        Announce the name to be used in the consequent call to <i>define</i> function passing
+it an anonymous module. This module will be stored in the <i>cinc</i> storage using <i>module_name</i>.
+
+Can be disabled by setting <i>root.CINC_NO_AMD_EMULATION</i> to <i>true</i>.
+    </div>
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>module_name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A unique name which will identify the module.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+    
+
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="cinc.js.html">cinc.js</a>, <a href="cinc.js.html#line190">line 190</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    Nothing
+</div>
+
+
+
+        
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="define"><span class="type-signature"></span>define<span class="signature">(module_name, deps, module)</span><span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+
     
     <div class="description">
         AMD <i>define</i> emulation
@@ -295,43 +433,45 @@
 the ability to load external module. This function just appends an AMD module
 to the <i>cinq</i> storage.
 
+Can be disabled by setting <i>root.CINC_NO_AMD_EMULATION</i> to <i>true</i>.
+
 <br/><b>NOTE:</b> This function is only available when there is no other AMD realizations found.
     </div>
     
 
     
+
     
-    
-    
+
     
         <h5>Parameters:</h5>
         
 
 <table class="params">
     <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
         <tr>
             
                 <td class="name"><code>module_name</code></td>
             
-            
+
             <td class="type">
             
                 
@@ -340,22 +480,22 @@ to the <i>cinq</i> storage.
 
             
             </td>
+
             
+
             
-            
-            
-            
+
             <td class="description last">A unique name which will identify the module.
      <i>cinq</i> does not support anonymous modules, so they will be ignored.</td>
         </tr>
-	
-	
-	
+
+    
+
         <tr>
             
                 <td class="name"><code>deps</code></td>
             
-            
+
             <td class="type">
             
                 
@@ -364,90 +504,92 @@ to the <i>cinq</i> storage.
 
             
             </td>
+
             
+
             
-            
-            
-            
+
             <td class="description last">A list of module's dependencies. For each item in this list function
      <i>use</i> will be applied and the results will be passed as arguments to the module's
      constructor (if any)</td>
         </tr>
-	
-	
-	
+
+    
+
         <tr>
             
                 <td class="name"><code>module</code></td>
             
-            
+
             <td class="type">
             
                 
 <span class="param-type">Object</span>
 |
 
-<span class="param-type">Function</span>
+<span class="param-type">function</span>
 
 
             
             </td>
+
             
+
             
-            
-            
-            
+
             <td class="description last">A module object or a constructor</td>
         </tr>
-	
-	
-	</tbody>
+
+    
+    </tbody>
 </table>
     
-    
+
     
 <dl class="details">
     
-        
-    
-    
+
     
 
     
+
     
+
     
+
     
+
     
+
     
+
     
-    
-    
-    
-    
-    
+
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cinc.js.html">cinc.js</a>, <a href="cinc.js.html#line191">line 191</a>
+        <a href="cinc.js.html">cinc.js</a>, <a href="cinc.js.html#line217">line 217</a>
     </li></ul></dd>
     
+
     
+
     
-    
-    
-    
+
     
 </dl>
 
+
     
+
     
 
     
 
     
+
     
-    
-    
+
     
     <h5>Returns:</h5>
     
@@ -459,7 +601,7 @@ to the <i>cinq</i> storage.
 
 
         
-    
+
     
 </dd>
 
@@ -467,11 +609,11 @@ to the <i>cinq</i> storage.
             
 <dt>
     <h4 class="name" id="provide"><span class="type-signature"></span>provide<span class="signature">(module_name, module)</span><span class="type-signature"></span></h4>
-    
+
     
 </dt>
 <dd>
-    
+
     
     <div class="description">
         Declare a module
@@ -479,38 +621,38 @@ to the <i>cinq</i> storage.
     
 
     
+
     
-    
-    
+
     
         <h5>Parameters:</h5>
         
 
 <table class="params">
     <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
         <tr>
             
                 <td class="name"><code>module_name</code></td>
             
-            
+
             <td class="type">
             
                 
@@ -519,91 +661,93 @@ to the <i>cinq</i> storage.
 
             
             </td>
+
             
+
             
-            
-            
-            
+
             <td class="description last">A unique name
      which will identify your module.
      Here you can use everything, for instance, module path:
      'lib/tools/wrench.js'</td>
         </tr>
-	
-	
-	
+
+    
+
         <tr>
             
                 <td class="name"><code>module</code></td>
             
-            
+
             <td class="type">
             
                 
 <span class="param-type">Object</span>
 |
 
-<span class="param-type">Function</span>
+<span class="param-type">function</span>
 
 
             
             </td>
+
             
+
             
-            
-            
-            
+
             <td class="description last">A module object or a constructor</td>
         </tr>
-	
-	
-	</tbody>
+
+    
+    </tbody>
 </table>
     
-    
+
     
 <dl class="details">
     
-        
-    
-    
+
     
 
     
+
     
+
     
+
     
+
     
+
     
+
     
-    
-    
-    
-    
-    
+
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cinc.js.html">cinc.js</a>, <a href="cinc.js.html#line40">line 40</a>
+        <a href="cinc.js.html">cinc.js</a>, <a href="cinc.js.html#line47">line 47</a>
     </li></ul></dd>
     
+
     
+
     
-    
-    
-    
+
     
 </dl>
 
+
     
+
     
 
     
 
     
+
     
-    
-    
+
     
     <h5>Returns:</h5>
     
@@ -615,19 +759,19 @@ to the <i>cinq</i> storage.
 
 
         
-    
+
     
 </dd>
 
         
             
 <dt>
-    <h4 class="name" id="require"><span class="type-signature"></span>require<span class="signature">(deps, <span class="optional">callback</span>)</span><span class="type-signature"></span></h4>
-    
+    <h4 class="name" id="require"><span class="type-signature"></span>require<span class="signature">(deps, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
     
 </dt>
 <dd>
-    
+
     
     <div class="description">
         AMD <i>require</i> emulation
@@ -636,45 +780,47 @@ to the <i>cinq</i> storage.
 the ability to load external module. This function just extracts AMD modules
 from the <i>cinq</i> storage and executes the callback.
 
+Can be disabled by setting <i>root.CINC_NO_AMD_EMULATION</i> to <i>true</i>.
+
 <br/><b>NOTE:</b> This function is only available when there is no other AMD realizations found.
     </div>
     
 
     
+
     
-    
-    
+
     
         <h5>Parameters:</h5>
         
 
 <table class="params">
     <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		<th>Argument</th>
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
         <tr>
             
                 <td class="name"><code>deps</code></td>
             
-            
+
             <td class="type">
             
                 
@@ -683,104 +829,106 @@ from the <i>cinq</i> storage and executes the callback.
 
             
             </td>
-            
+
             
                 <td class="attributes">
                 
-                    
+
                 
-                    
+
                 
                 </td>
             
+
             
-            
-            
+
             <td class="description last">A list of previously defined modules to include.</td>
         </tr>
-	
-	
-	
+
+    
+
         <tr>
             
                 <td class="name"><code>callback</code></td>
             
-            
+
             <td class="type">
             
                 
-<span class="param-type">Function</span>
+<span class="param-type">function</span>
 
 
             
             </td>
-            
+
             
                 <td class="attributes">
                 
                     &lt;optional><br>
                 
-                    
+
                 
-                    
+
                 
                 </td>
             
+
             
-            
-            
+
             <td class="description last">A function that will be called after modules are included successfully.
      This function will be passed loaded module objects as arguments.</td>
         </tr>
-	
-	
-	</tbody>
+
+    
+    </tbody>
 </table>
     
-    
+
     
 <dl class="details">
     
-        
-    
-    
+
     
 
     
+
     
+
     
+
     
+
     
+
     
+
     
-    
-    
-    
-    
-    
+
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cinc.js.html">cinc.js</a>, <a href="cinc.js.html#line252">line 252</a>
+        <a href="cinc.js.html">cinc.js</a>, <a href="cinc.js.html#line288">line 288</a>
     </li></ul></dd>
     
+
     
+
     
-    
-    
-    
+
     
 </dl>
 
+
     
+
     
 
     
 
     
+
     
-    
-    
+
     
     <h5>Returns:</h5>
     
@@ -792,19 +940,19 @@ from the <i>cinq</i> storage and executes the callback.
 
 
         
-    
+
     
 </dd>
 
         
             
 <dt>
-    <h4 class="name" id="use"><span class="type-signature"></span>use<span class="signature">(module_name, <span class="optional">options</span>)</span><span class="type-signature"></span></h4>
-    
+    <h4 class="name" id="use"><span class="type-signature"></span>use<span class="signature">(module_name, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
     
 </dt>
 <dd>
-    
+
     
     <div class="description">
         Include a module
@@ -812,40 +960,40 @@ from the <i>cinq</i> storage and executes the callback.
     
 
     
+
     
-    
-    
+
     
         <h5>Parameters:</h5>
         
 
 <table class="params">
     <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		<th>Argument</th>
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
         <tr>
             
                 <td class="name"><code>module_name</code></td>
             
-            
+
             <td class="type">
             
                 
@@ -854,30 +1002,30 @@ from the <i>cinq</i> storage and executes the callback.
 
             
             </td>
-            
+
             
                 <td class="attributes">
                 
-                    
+
                 
-                    
+
                 
                 </td>
             
+
             
-            
-            
+
             <td class="description last">Module name which has been
      associated with the module using <i>provide</i> call</td>
         </tr>
-	
-	
-	
+
+    
+
         <tr>
             
                 <td class="name"><code>options</code></td>
             
-            
+
             <td class="type">
             
                 
@@ -886,73 +1034,75 @@ from the <i>cinq</i> storage and executes the callback.
 
             
             </td>
-            
+
             
                 <td class="attributes">
                 
                     &lt;optional><br>
                 
-                    
+
                 
-                    
+
                 
                 </td>
             
+
             
-            
-            
+
             <td class="description last">Extra arguments to be passed
      to the init function if any. Default: []</td>
         </tr>
-	
-	
-	</tbody>
+
+    
+    </tbody>
 </table>
     
-    
+
     
 <dl class="details">
     
-        
-    
-    
+
     
 
     
+
     
+
     
+
     
+
     
+
     
+
     
-    
-    
-    
-    
-    
+
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cinc.js.html">cinc.js</a>, <a href="cinc.js.html#line78">line 78</a>
+        <a href="cinc.js.html">cinc.js</a>, <a href="cinc.js.html#line85">line 85</a>
     </li></ul></dd>
     
+
     
+
     
-    
-    
-    
+
     
 </dl>
 
+
     
+
     
 
     
 
     
+
     
-    
-    
+
     
     <h5>Returns:</h5>
     
@@ -964,7 +1114,7 @@ from the <i>cinq</i> storage and executes the callback.
 
 
         
-    
+
     
 </dd>
 
@@ -972,11 +1122,11 @@ from the <i>cinq</i> storage and executes the callback.
             
 <dt>
     <h4 class="name" id="useall"><span class="type-signature"></span>useall<span class="signature">(module_names)</span><span class="type-signature"></span></h4>
-    
+
     
 </dt>
 <dd>
-    
+
     
     <div class="description">
         Include multiple modules
@@ -984,38 +1134,38 @@ from the <i>cinq</i> storage and executes the callback.
     
 
     
+
     
-    
-    
+
     
         <h5>Parameters:</h5>
         
 
 <table class="params">
     <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
         <tr>
             
                 <td class="name"><code>module_names</code></td>
             
-            
+
             <td class="type">
             
                 
@@ -1027,63 +1177,65 @@ from the <i>cinq</i> storage and executes the callback.
 
             
             </td>
+
             
+
             
-            
-            
-            
+
             <td class="description last">Either a regular expression or a list of module names
      to include</td>
         </tr>
-	
-	
-	</tbody>
+
+    
+    </tbody>
 </table>
     
-    
+
     
 <dl class="details">
     
-        
-    
-    
+
     
 
     
+
     
+
     
+
     
+
     
+
     
+
     
-    
-    
-    
-    
-    
+
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cinc.js.html">cinc.js</a>, <a href="cinc.js.html#line146">line 146</a>
+        <a href="cinc.js.html">cinc.js</a>, <a href="cinc.js.html#line153">line 153</a>
     </li></ul></dd>
     
+
     
+
     
-    
-    
-    
+
     
 </dl>
 
+
     
+
     
 
     
 
     
+
     
-    
-    
+
     
     <h5>Returns:</h5>
     
@@ -1096,19 +1248,19 @@ from the <i>cinq</i> storage and executes the callback.
 
 
         
-    
+
     
 </dd>
 
         </dl>
     
+
     
-    
-    
+
     
 </article>
 
-</section>  
+</section>
 
 
 
@@ -1116,13 +1268,13 @@ from the <i>cinq</i> storage and executes the callback.
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#define">define</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#provide.config">provide.config</a></li><li><a href="global.html#require">require</a></li><li><a href="global.html#use">use</a></li><li><a href="global.html#use.config">use.config</a></li><li><a href="global.html#useall">useall</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#announce_module">announce_module</a></li><li><a href="global.html#define">define</a></li><li><a href="global.html#provide">provide</a></li><li><a href="global.html#provide.config">provide.config</a></li><li><a href="global.html#require">require</a></li><li><a href="global.html#use">use</a></li><li><a href="global.html#use.config">use.config</a></li><li><a href="global.html#useall">useall</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Thu Jun 13 2013 12:54:59 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Fri May 15 2015 09:10:21 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>
