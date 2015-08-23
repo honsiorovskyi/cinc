@@ -1,3 +1,5 @@
+**Important!** This projects is deprecated and will not be supported by me anymore.
+
 Getting started
 ===============
 
